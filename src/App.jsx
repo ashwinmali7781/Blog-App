@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
+import EditPost from "./pages/EditPost";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/create" element={<CreatePost />} />
             <Route path="/posts/:id" element={<PostDetails />} />
             <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/edit/:id" element={<EditPost />} />
           </Routes>
         </main>
       </div>

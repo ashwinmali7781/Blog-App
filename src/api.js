@@ -1,4 +1,5 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
 
 const readToken = () => localStorage.getItem("tb_token");
 
@@ -56,4 +57,11 @@ export const api = {
       method: "POST",
       body: JSON.stringify(payload),
     }),
+  deletePost: (id) => request(`/posts/${id}`, { method: "DELETE" }),
+  updatePost: (id, payload) =>
+  request(`/posts/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  }),
 };
+
