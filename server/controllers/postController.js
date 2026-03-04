@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import Post from '../models/Post.js';
 
 // export const getPosts = async (_req, res) => {
@@ -162,70 +161,3 @@ export const getPostById = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-=======
-import Post from '../models/Post.js';
-
-export const getPosts = async (_req, res) => {
-  const posts = await Post.find().populate('author', 'name email').sort({ createdAt: -1 });
-  return res.json(posts);
-};
-
-export const getPostById = async (req, res) => {
-  const post = await Post.findById(req.params.id).populate('author', 'name email');
-
-  if (!post) {
-    return res.status(404).json({ message: 'Post not found' });
-  }
-
-  return res.json(post);
-};
-
-export const createPost = async (req, res) => {
-  const { title, summary, content, tags } = req.body;
-
-  const post = await Post.create({
-    title,
-    summary,
-    content,
-    tags: tags || [],
-    author: req.user.id,
-  });
-
-  return res.status(201).json(post);
-};
-
-export const updatePost = async (req, res) => {
-  const post = await Post.findById(req.params.id);
-
-  if (!post) {
-    return res.status(404).json({ message: 'Post not found' });
-  }
-
-  if (String(post.author) !== req.user.id) {
-    return res.status(403).json({ message: 'Not allowed to edit this post' });
-  }
-
-  post.title = req.body.title ?? post.title;
-  post.summary = req.body.summary ?? post.summary;
-  post.content = req.body.content ?? post.content;
-  post.tags = req.body.tags ?? post.tags;
-
-  const updatedPost = await post.save();
-  return res.json(updatedPost);
-};
-
-export const deletePost = async (req, res) => {
-  const post = await Post.findById(req.params.id);
-
-  if (!post) {
-    return res.status(404).json({ message: 'Post not found' });
-  }
-
-  if (String(post.author) !== req.user.id) {
-    return res.status(403).json({ message: 'Not allowed to delete this post' });
-  }
-
-  await post.deleteOne();
-  return res.json({ message: 'Post deleted' });
-};
->>>>>>> 7a128ed1b4280188d3e16a6c3f9dcf1f14539422
