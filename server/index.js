@@ -5,11 +5,7 @@ import { connectDB } from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import postRoutes from './routes/postRoutes.js';
 
-<<<<<<< HEAD
 dotenv.config();  
-=======
-dotenv.config();
->>>>>>> 7a128ed1b4280188d3e16a6c3f9dcf1f14539422
 connectDB();
 
 const app = express();
