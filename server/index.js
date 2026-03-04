@@ -25,7 +25,12 @@ app.use((error, _req, res, _next) => {
   res.status(500).json({ message: 'Server error' });
 });
 
+app.get("/", (req, res) => {
+  res.send("Blog API is running ");
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
